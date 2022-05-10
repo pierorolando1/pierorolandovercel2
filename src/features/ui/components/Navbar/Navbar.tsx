@@ -1,9 +1,11 @@
 import { Tabs, Text } from "@geist-ui/core"
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { useEffect, useRef } from "react";
 import styled from 'styled-components';
 import { useStoreBlog } from "../../../blog/zustand/navbarBlog";
 
-const NavbarContainar = styled.nav`
+const NavbarContainer = styled.nav`
 background: url('/dark-grey.jpg');
 background-size: cover;
 background-repeat: no-repeat;
@@ -45,7 +47,7 @@ export default () => {
                     hideBlogBar()
                 } else {
                     showBlogBar()
-                    console.log("mostrar navbar")
+                    console.log("show navbar")
                 }
             },
         )
@@ -53,17 +55,19 @@ export default () => {
         observer.observe(bottomNavbar.current!);
     }, [])
 
+    const { push } = useRouter()
+
     return (
-        <NavbarContainar>
+        <NavbarContainer>
             <NavbarAbove>
                 <Text h5 style={{ margin: "auto 0.7rem" }}>Blog</Text>
             </NavbarAbove>
             <NavbarBelow ref={bottomNavbar}>
-                <Tabs hideDivider hideBorder initialValue="1">
-                    <Tabs.Item value="1" label={<>Home</>} />
-                    <Tabs.Item value="2" label={<>Blog</>} />
+                <Tabs onChange={e => push(e)} hideDivider hideBorder initialValue="/">
+                    <Tabs.Item value="/" label={<Link href="/">Home</Link>} />
+                    <Tabs.Item value="/blog" label={<Link href="/blog">Blog</Link>} />
                 </Tabs>
             </NavbarBelow>
-        </NavbarContainar >
+        </NavbarContainer>
     )
 }
