@@ -1,4 +1,4 @@
-import { Tabs, useTheme } from "@geist-ui/core"
+import { AutoComplete, Spacer, Tabs, useTheme } from "@geist-ui/core"
 import styled from "styled-components"
 import ChangeThemeDropdown from "../../../geist-theme/components/ChangeThemeDropdown"
 
@@ -10,6 +10,7 @@ max-width: 65.5rem;
 display: flex;
 justify-content: space-between;
 align-items: center;
+z-index: 1;
 
 background-color: ${
     // @ts-ignore
