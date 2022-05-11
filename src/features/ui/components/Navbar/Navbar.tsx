@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useEffect, useRef } from "react";
 import styled from 'styled-components';
 import { useStoreBlog } from "../../../blog/zustand/navbarBlog";
+import ChangeThemeDropdown from "../../../geist-theme/components/ChangeThemeDropdown";
 
 const NavbarContainer = styled.nav`
 background: url('/dark-grey.jpg');
@@ -27,6 +28,7 @@ max-width: 65.5rem;
 margin: 0 auto;
 display: flex;
 align-items: center;
+justify-content: space-between;
 position: sticky;
 top: -1px;
 `
@@ -67,6 +69,7 @@ export default () => {
                     <Tabs.Item value="/" label={<Link href="/">Home</Link>} />
                     <Tabs.Item value="/blog" label={<Link href="/blog">Blog</Link>} />
                 </Tabs>
+                <ChangeThemeDropdown />
             </NavbarBelow>
         </NavbarContainer>
     )
