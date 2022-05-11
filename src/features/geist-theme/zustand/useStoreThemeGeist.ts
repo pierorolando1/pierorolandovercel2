@@ -6,7 +6,10 @@ export type Theme = typeof THEMES[number];
 
 const useStoreTheme = create<{ theme: Theme, setTheme: (theme: Theme) => void }>((set) => ({
     theme: "default",
-    setTheme: (theme: Theme) => set({ theme }),
+    setTheme: (theme: Theme) => {
+        localStorage.setItem("theme", theme);
+        set({ theme })
+    },
 }))
 
 export const useGeistTheme = () => {

@@ -2,7 +2,8 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { CssBaseline, GeistProvider, Themes } from '@geist-ui/core'
 import Navbar from '../features/ui/components/Navbar'
-import { useGeistTheme } from '../features/geist-theme/zustand/useStoreThemeGeist'
+import { useGeistTheme, Theme } from '../features/geist-theme/zustand/useStoreThemeGeist'
+import { useEffect } from 'react'
 
 const defaultTheme = Themes.createFromDark({
     type: "default",
@@ -21,7 +22,11 @@ const defaultTheme = Themes.createFromDark({
 })
 
 function MyApp({ Component, pageProps }: AppProps) {
-    const { currentTheme } = useGeistTheme()
+    const { currentTheme, setTheme } = useGeistTheme()
+
+    useEffect(() => {
+        setTheme(localStorage.getItem("theme") as Theme || "default")
+    }, [])
 
     return (
         <GeistProvider themes={[defaultTheme]} themeType={currentTheme}>
