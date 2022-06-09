@@ -1,10 +1,10 @@
 import { AutoComplete, Spacer } from "@geist-ui/core"
+import Head from "next/head"
 
 import BlogNavbar from "../../components/BlogNavbar"
 import BlogPostCard from "../../components/BlogPostCard"
 import { PostType } from "../../types/post"
 import { useStoreBlog } from "../../zustand/navbarBlog"
-
 
 export default function BlogPage({ posts }: { posts: PostType[] }) {
 
@@ -15,9 +15,21 @@ export default function BlogPage({ posts }: { posts: PostType[] }) {
     return (
         <>
             {
-                show ? <BlogNavbar /> : <></>
+                show
+                    ?
+                    <BlogNavbar
+                        items={[{ label: "All", value: "all" }, { value: "Tutorials", label: "tutorials" }]}
+                    />
+                    :
+                    <></>
             }
-            <div style={{ height: "120vh" }}>
+            <Head>
+                <title>Blog</title>
+            </Head>
+            <div
+                style={{
+                    // height: "100vh"
+                }}>
                 <Spacer />
                 <AutoComplete options={[]} placeholder="Search..." onSearch={() => { }} />
                 <Spacer />

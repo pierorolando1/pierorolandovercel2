@@ -1,5 +1,5 @@
-import { Text, Spacer } from "@geist-ui/core"
-import { Heart } from "@geist-ui/icons"
+import { Text, Spacer, useTheme } from "@geist-ui/core"
+import { Share } from "@geist-ui/icons"
 import Link from "next/link"
 import { FC } from "react"
 import styled from "styled-components"
@@ -34,6 +34,8 @@ const BlogPostCard: FC<{
     post: Omit<PostType, "content">
 }> = ({ post }) => {
 
+    const { palette } = useTheme()
+
     return (
         <Card key={post.id}>
             <div
@@ -58,9 +60,10 @@ const BlogPostCard: FC<{
                     <Text h6 style={{ opacity: "0.6", fontWeight: "400" }}>{post.description}</Text>
                 </div>
                 <div>
-                    <Button>
-                        <Heart size={18} />
-                        16
+                    <Button style={{
+                        color: palette.successLight
+                    }}>
+                        <Share size={18} />
                     </Button>
                 </div>
 

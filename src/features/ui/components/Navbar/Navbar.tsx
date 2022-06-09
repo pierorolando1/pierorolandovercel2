@@ -62,7 +62,7 @@ export default () => {
     return (
         <NavbarContainer>
             <NavbarAbove>
-                <Text h5 style={{ margin: "auto 0.7rem" }}>Blog</Text>
+                <Text h5 style={{ margin: "auto 0.7rem", color: "whitesmoke" }}>Blog</Text>
             </NavbarAbove>
             <NavbarBelow ref={bottomNavbar}>
                 <Tabs onChange={e => push(e)} hideDivider hideBorder initialValue="/">

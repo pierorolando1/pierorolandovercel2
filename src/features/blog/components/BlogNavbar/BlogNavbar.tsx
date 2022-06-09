@@ -1,6 +1,7 @@
-import { AutoComplete, Spacer, Tabs, useTheme } from "@geist-ui/core"
+import { Spacer, Tabs, useTheme } from "@geist-ui/core"
+import type { FC } from "react"
 import styled from "styled-components"
-import ChangeThemeDropdown from "../../../geist-theme/components/ChangeThemeDropdown"
+import ChangeThemeDropdown from "@/features/geist-theme/components/ChangeThemeDropdown"
 
 const BlogNavbar = styled.nav`
 position: fixed;
@@ -31,17 +32,31 @@ animation: fadeIn 0.25s ease;
 }
 `
 
-export default () => {
-    const { palette: { background } } = useTheme()
-    return (
-        //@ts-ignore
-        <BlogNavbar background={background}>
-            <Tabs hideDivider initialValue="1">
-                <Tabs.Item value="1" label={<>All</>} />
-                <Tabs.Item value="2" label={<>Tutorials</>} />
-            </Tabs>
-            <ChangeThemeDropdown />
-        </BlogNavbar>
-    )
-}
+const BlogStickyBar: FC<{
+    items: { value: string, label: string }[],
+    onChange?: (value: string) => void,
+    initialValue?: string
+}> = ({
+    items,
+    onChange,
+    initialValue = items[0].value
+}) => {
+        const { palette: { background } } = useTheme()
 
+        return (
+            //@ts-ignore
+            <BlogNavbar background={background}>
+                <Tabs onChange={onChange} hideDivider initialValue={initialValue}>
+                    {
+                        items.map(item => {
+                            return <Tabs.Item key={item.value} value={item.value} label={<>{item.label}</>} />
+                        })
+                    }
+                </Tabs>
+                <ChangeThemeDropdown />
+                <Spacer w={10} />
+            </BlogNavbar>
+        )
+    }
+
+export default BlogStickyBar
